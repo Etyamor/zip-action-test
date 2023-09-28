@@ -1,0 +1,28 @@
+name: Build Plugin
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  zip-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Move files to separate folder'
+        run: |
+          mkdir seoai-client
+          mv assets/ seoai-client/
+          mv inc/ seoai-client/
+          mv index.php/ seoai-client/
+      - name: 'Zip Plugin'
+        uses: vimtor/action-zip@v1
+        with:
+          files: seoai-client/
+          dest: seoai-client.zip
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: seoai-client-${{ github.event.release.tag_name }}-${{ steps.date.outputs.date }}
+          path: my_file.txt
+          retention-days: 5
