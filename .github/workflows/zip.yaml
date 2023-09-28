@@ -8,6 +8,9 @@ jobs:
   zip-files:
     runs-on: ubuntu-latest
     steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - uses: actions/checkout@v2
       - name: 'Move files to separate folder'
         run: |
@@ -23,6 +26,6 @@ jobs:
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
-          name: seoai-client-${{ github.event.release.tag_name }}-${{ github.event.repository.updated_at }}
+          name: seoai-client-${{ github.event.release.tag_name }}-${{ steps.date.outputs.date }}
           path: seoai-client.zip
           retention-days: 5
