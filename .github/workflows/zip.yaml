@@ -14,7 +14,7 @@ jobs:
           mkdir seoai-client
           mv assets/ seoai-client/
           mv inc/ seoai-client/
-          mv index.php/ seoai-client/
+          mv index.php seoai-client/
       - name: 'Zip Plugin'
         uses: vimtor/action-zip@v1
         with:
