@@ -23,6 +23,6 @@ jobs:
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
-          name: seoai-client-${{ github.event.release.tag_name }}-${{ steps.date.outputs.date }}
+          name: seoai-client-${{ github.event.release.tag_name }}-${{ github.event.repository.updated_at }}
           path: seoai-client.zip
           retention-days: 5
